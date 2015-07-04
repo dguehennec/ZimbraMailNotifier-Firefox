@@ -51,8 +51,7 @@ var EXPORTED_SYMBOLS = ["zimbra_notifier_Prefs"];
  */
 var zimbra_notifier_Prefs = {
     _prefs: null,
-    _is_first_launch: false,
-    _previous_version: 0
+    _is_first_launch: false
 };
 
 /**
@@ -138,14 +137,21 @@ zimbra_notifier_Prefs.load = function() {
     this.pref_request_wait_loop_time  = this._getPref(this.PREF.REQUEST_WAIT_LOOP_TIME);
 
     // Get the previous version
-    this._previous_version = this._getPref(this.PREF.CURRENT_VERSION);
-
+    var pref_previous_version = this._getPref(this.PREF.CURRENT_VERSION);
+    this.pref_current_version = zimbra_notifier_Constant.VERSION;
     // Check if this is the first time the extension is started
-    if (!this._previous_version) {
+    if (!pref_previous_version) {
         this._is_first_launch = true;
+    } else if (pref_previous_version < this.pref_current_version) {
+        if (this.pref_user_url_web_service == "http://zimbra.free.fr") {
+            this.pref_user_url_web_service    = "https://zimbra.free.fr";
+            this.pref_user_url_web_interface  = "https://zimbra.free.fr/zimbra/mail";
+            this._prefs.setCharPref(this.PREF.USER_URL_WEB_SERVICE, this.pref_user_url_web_service);
+            this._prefs.setCharPref(this.PREF.USER_URL_WEB_INTERFACE, this.pref_user_url_web_interface);
+        }
     }
     // Set the current version
-    this.pref_current_version = zimbra_notifier_Constant.VERSION;
+    
     this._prefs.setIntPref(this.PREF.CURRENT_VERSION, this.pref_current_version);
 };
 

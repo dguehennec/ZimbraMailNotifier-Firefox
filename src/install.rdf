@@ -4,7 +4,7 @@
     <Description about="urn:mozilla:install-manifest">
 
         <em:id>zimbra_mail_notifier@davidguehennec.com</em:id>
-        <em:version>2.1.0</em:version>
+        <em:version>2.1.1</em:version>
         <em:type>2</em:type>
         <em:creator>David GUEHENNEC</em:creator>
         <em:developer>Benjamin ROBIN</em:developer>

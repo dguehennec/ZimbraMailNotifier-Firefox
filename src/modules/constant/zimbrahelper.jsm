@@ -45,7 +45,7 @@ var zimbra_notifier_Constant = {};
  *
  * @constant
  */
-zimbra_notifier_Constant.VERSION = 0x020100;
+zimbra_notifier_Constant.VERSION = 0x020101;
 
 /**
  * Logger level
